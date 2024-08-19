@@ -6,7 +6,7 @@ const verifyToken = (req, res, next) => {
 
         if (!token) {
             return res.status(401).json({
-                status: failed,
+                status: 'failed',
                 message: 'Token tidak terdeteksi'
             });
         }
@@ -15,7 +15,7 @@ const verifyToken = (req, res, next) => {
 
         if (!accessToken) {
             return res.status(401).json({
-                status: failed,
+                status: 'failed',
                 message: 'Unauthorized'
             });
         }
@@ -25,7 +25,7 @@ const verifyToken = (req, res, next) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({
-            status: failed,
+            status: 'failed',
             message: 'Internal Server Error :' + error
         });
     }
