@@ -4,11 +4,55 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  role      UserRole
+  avatar    String?
+  tasks     Task[]
+}
+
+enum UserRole {
+  frontend
+  backend
+  designer
+  analyst
+  pm
+}
+
+model Project {
+  id        Int      @id @default(autoincrement())
+  name      String
+  description String?
+  tasks     Task[]
+}
+
+model Task {
+  id        Int      @id @default(autoincrement())
+  title     String
+  description String?
+  status    TaskStatus  @default(pending)
+  deadline  DateTime
+  userId    Int
+  projectId Int
+  user      User     @relation(fields: [userId], references: [id])
+  project   Project  @relation(fields: [projectId], references: [id])
+}
+
+enum TaskStatus {
+  pending
+  diproses
+  selesai
+}
+
