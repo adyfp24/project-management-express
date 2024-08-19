@@ -1,6 +1,7 @@
 const prisma = require('../prismaClient');
 const fs = require('fs');
 const path = require('path');
+const bcrypt = require('bcrypt');
 
 const getProfile = async (userId) => {
     try {
@@ -17,12 +18,24 @@ const getProfile = async (userId) => {
 
 const updateProfile = async (userId, updatedData) => {
     try {
+        const { password, ...profileData } = updatedData;
+
+        const dataToUpdate = {
+            ...profileData
+        };
+
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            dataToUpdate.password = hashedPassword;
+        }
+
         const newProfile = await prisma.user.update({
             where: {
                 id: userId
             },
-            data: updatedData
+            data: dataToUpdate
         });
+
         return newProfile;
     } catch (error) {
         throw new Error(error);

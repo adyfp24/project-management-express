@@ -85,7 +85,7 @@ const updateTask = async (req, res) => {
             status,
             userId,
             projectId,
-            deadline: new Date(deadline)
+            deadline
         });
 
         if (!updatedTask) {
