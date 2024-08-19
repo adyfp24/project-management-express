@@ -3,7 +3,7 @@ const authService = require('../services/auth-service');
 const loginUser = async (req, res) => {
     try {
         const { username, password } = req.body;
-        const loggedInUser = await authService.login(username, password);
+        const loggedInUser = await authService.loginUser(username, password);
 
         if (!loggedInUser.success) {
             return res.status(400).json({
@@ -37,7 +37,7 @@ const registerUser = async (req, res) => {
         };
 
         const newUser = await authService.registerUser(data);
-        
+
         if (!newUser.success) {
             return res.status(400).json({
                 "status": "failed",

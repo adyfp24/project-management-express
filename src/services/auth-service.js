@@ -7,7 +7,7 @@ const loginUser = async (username, password) => {
         const user = await prisma.user.findUnique({ where: { username } });
 
         if (!user) {
-            return { success: false, message: 'Username tidak valid' };
+            return { success: false, message: 'Username tidak terdaftar' };
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -16,7 +16,7 @@ const loginUser = async (username, password) => {
             const accessToken = utilsToken.generateJWTAccess(user.id);
             return {
                 success: true,
-                data: { user, token: accessToken },
+                data: { user, access_token: accessToken },
             };
         } else {
             return { success: false, message: 'Password salah' };
@@ -38,7 +38,7 @@ const registerUser = async (userData) => {
         if (userData.role && !validRoles.includes(userData.role)) {
             return { succes: false, message: "role tidak valid" }
         }
-        
+
         const hashedPassword = await bcrypt.hash(userData.password, 10);
         const newUser = await prisma.user.create({
             data: {
