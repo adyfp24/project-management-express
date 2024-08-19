@@ -14,13 +14,13 @@ generator client {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  name      String
-  role      UserRole
-  avatar    String?
-  tasks     Task[]
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String
+  username String   @unique
+  role     UserRole
+  avatar   String?
+  tasks    Task[]
 }
 
 enum UserRole {
@@ -32,22 +32,22 @@ enum UserRole {
 }
 
 model Project {
-  id        Int      @id @default(autoincrement())
-  name      String
+  id          Int     @id @default(autoincrement())
+  name        String
   description String?
-  tasks     Task[]
+  tasks       Task[]
 }
 
 model Task {
-  id        Int      @id @default(autoincrement())
-  title     String
+  id          Int        @id @default(autoincrement())
+  title       String
   description String?
-  status    TaskStatus  @default(pending)
-  deadline  DateTime
-  userId    Int
-  projectId Int
-  user      User     @relation(fields: [userId], references: [id])
-  project   Project  @relation(fields: [projectId], references: [id])
+  status      TaskStatus @default(pending)
+  deadline    DateTime
+  userId      Int
+  projectId   Int
+  user        User       @relation(fields: [userId], references: [id])
+  project     Project    @relation(fields: [projectId], references: [id])
 }
 
 enum TaskStatus {
@@ -55,4 +55,3 @@ enum TaskStatus {
   diproses
   selesai
 }
-

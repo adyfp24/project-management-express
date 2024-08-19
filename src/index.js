@@ -14,10 +14,10 @@ app.get('/', (req, res) => {
     const name = process.env.NAME || 'Ady Firdaus';
     res.send(`Technical Test API MSIB SEAL - ${name}!`);
 });
-app.use('api/v1', authRoute);
-app.use('api/v1', profileRoute);
-app.use('api/v1', taskRoute);
-app.use('api/v1', proyekRoute);
+app.use('/api/v1', authRoute);
+app.use('/api/v1', profileRoute);
+app.use('/api/v1', taskRoute);
+app.use('/api/v1', proyekRoute);
 
 // import swaggerUi from 'swagger-ui-express';
 // import swaggerDocument from 'swagger-autogen';
