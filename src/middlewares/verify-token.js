@@ -6,16 +6,16 @@ const verifyToken = (req, res, next) => {
 
         if (!token) {
             return res.status(401).json({
-                success: false,
+                status: failed,
                 message: 'Token tidak terdeteksi'
             });
         }
 
         const accessToken = jwt.verify(token, process.env.ACCESS_KEY);
 
-        if (!apiToken) {
+        if (!accessToken) {
             return res.status(401).json({
-                success: false,
+                status: failed,
                 message: 'Unauthorized'
             });
         }
@@ -25,7 +25,7 @@ const verifyToken = (req, res, next) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({
-            success: false,
+            status: failed,
             message: 'Internal Server Error :' + error
         });
     }

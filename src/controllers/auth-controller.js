@@ -57,9 +57,12 @@ const registerUser = async (req, res) => {
     }
 }
 
-const logoutUser = async () => {
+const logoutUser = (req, res) => {
     try {
-
+        return res.status(200).json({
+            "status": "success",
+            "message": "tes logout",
+        })
     } catch (error) {
 
     }
