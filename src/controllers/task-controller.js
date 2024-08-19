@@ -71,6 +71,14 @@ const updateTask = async (req, res) => {
         const taskId = parseInt(req.params.id, 10);
         const { title, description, status, userId, projectId, deadline } = req.body;
 
+        const validTaskStatus = ['pending', 'diproses', 'selesai'];
+        if (status && !validTaskStatus.includes(status)) {
+            return res.status(404).json({
+                "status": "failed",
+                "message": "Status tugas tidak valid"
+            });
+        }
+
         const updatedTask = await taskService.updateTask(taskId, {
             title,
             description,
