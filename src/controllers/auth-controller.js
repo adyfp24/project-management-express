@@ -26,7 +26,8 @@ const loginUser = async (req, res) => {
 
 const registerUser = async (req, res) => {
     try {
-        const { username, password, email, role, avatar } = req.body;
+        const avatar = req.file ? req.file.filename : undefined;
+        const { username, password, email, role } = req.body;
 
         const data = {
             username,
