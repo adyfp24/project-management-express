@@ -24,9 +24,9 @@ const verifyToken = (req, res, next) => {
         next();
     } catch (error) {
         console.error(error);
-        res.status(500).json({
-            status: 'failed',
-            message: 'Internal Server Error :' + error
+        return res.status(500).json({
+            "status": "failed",
+            "message": "Internal Server Error: " + error.message
         });
     }
 };

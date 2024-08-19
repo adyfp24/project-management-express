@@ -19,8 +19,8 @@ const loginUser = async (req, res) => {
     } catch (error) {
         return res.status(500).json({
             "status": "failed",
-            "message": "internal server error : " + error
-        })
+            "message": "Internal Server Error: " + error.message
+        });
     }
 }
 
@@ -50,10 +50,10 @@ const registerUser = async (req, res) => {
             "data": newUser.data
         });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             "status": "failed",
-            "message": "internal server error : " + error
-        })
+            "message": "Internal Server Error: " + error.message
+        });
     }
 }
 
@@ -64,7 +64,10 @@ const logoutUser = (req, res) => {
             "message": "tes logout",
         })
     } catch (error) {
-
+        return res.status(500).json({
+            "status": "failed",
+            "message": "Internal Server Error: " + error.message
+        });
     }
 }
 
@@ -72,7 +75,10 @@ const refreshToken = async () => {
     try {
 
     } catch (error) {
-
+        return res.status(500).json({
+            "status": "failed",
+            "message": "Internal Server Error: " + error.message
+        });
     }
 }
 
