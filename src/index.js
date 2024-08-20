@@ -19,9 +19,9 @@ app.use('/api/v1', profileRoute);
 app.use('/api/v1', taskRoute);
 app.use('/api/v1', proyekRoute);
 
-// import swaggerUi from 'swagger-ui-express';
-// import swaggerDocument from 'swagger-autogen';
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../docs/swagger-output.json');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const port = parseInt(process.env.PORT || '3000');
 app.listen(port, () => {
