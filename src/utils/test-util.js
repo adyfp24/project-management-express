@@ -30,7 +30,26 @@ const createTestUser = async () => {
     }
 };
 
+const createTestProject = async () => {
+    await prisma.project.create({
+        data: {
+            name: 'Test Project',
+            description: 'Test project description'
+        }
+    });
+};
+
+const removeTestProjects = async () => {
+    await prisma.project.deleteMany({
+        where: {
+            name: 'Test Project'
+        }
+    });
+};
+
 module.exports = {
     removeTestUser,
     createTestUser,
+    createTestProject,
+    removeTestProjects
 };

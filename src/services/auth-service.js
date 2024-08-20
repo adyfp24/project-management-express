@@ -56,17 +56,7 @@ const registerUser = async (userData) => {
     }
 }
 
-const logoutUser = async () => {
-
-}
-
-const refreshToken = async () => {
-
-}
-
 module.exports = {
     loginUser,
     registerUser,
-    logoutUser,
-    refreshToken
 }

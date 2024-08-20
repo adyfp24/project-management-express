@@ -58,34 +58,7 @@ const registerUser = async (req, res) => {
     }
 }
 
-const logoutUser = (req, res) => {
-    try {
-        return res.status(200).json({
-            "status": "success",
-            "message": "tes logout",
-        })
-    } catch (error) {
-        return res.status(500).json({
-            "status": "failed",
-            "message": "Internal Server Error: " + error.message
-        });
-    }
-}
-
-const refreshToken = async () => {
-    try {
-
-    } catch (error) {
-        return res.status(500).json({
-            "status": "failed",
-            "message": "Internal Server Error: " + error.message
-        });
-    }
-}
-
 module.exports = {
     loginUser,
     registerUser,
-    logoutUser,
-    refreshToken
 }
